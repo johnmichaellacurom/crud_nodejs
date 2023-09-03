@@ -1,0 +1,27 @@
+{
+  "url": "http://localhost:5000/users",
+  "backup": {
+    "bodyType": "raw",
+    "data": {},
+    "bodySubType": "json",
+    "rawData": "{\"user_id\":4, \"username\":\"admin2\", \"password\":\"admin2\" }"
+  },
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "data": {
+    "user_id": 3,
+    "username": "admin2",
+    "password": "admin2"
+  },
+  "headersArray": [
+    [
+      "d1bb8262-bf70-425d-8057-57eb58a56d3f",
+      "Content-Type",
+      "application/json",
+      true,
+      "STRING"
+    ]
+  ],
+  "method": "post"
+}

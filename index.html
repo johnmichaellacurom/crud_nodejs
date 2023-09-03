@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Test NodeJS</title>
+        <link rel="stylesheet" href="./bootstrap-5.3.1-dist/css/bootstrap.min.css">
+        <script type="text/javascript" src="./bootstrap-5.3.1-dist/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="./jquery-3.6.0.min.js"></script>
+    </head>
+    <body>
+        <div class="container mt-5" id="container">
+            <div class="m-5">
+                <input type="text" class="form-control m-2" placeholder="username" id="username">
+                <input type="text" class="form-control m-2" placeholder="password" id="password">
+                <button type="button" class="btn btn-primary m-2" id="addAccount">Add account</button>
+                <p class="p-2 text-primary m-2 d-none" id="added">Added successfully</p>
+            </div>
+            <table class="table table-hover table-striped table-light">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Password</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </div>
+
+        <script>
+
+            $(document).ready(function(){
+                const users = async ()=>{
+                    try{
+                        const response = await fetch("http://localhost:5000/users", {method : "GET"});
+                        const jsonData = await response.json();
+    
+                        jsonData.map((value, index, array) => {
+                            var tbody = $('#tbody');
+                            tbody.append("<tr><td>"+value.user_id+"</td><td>"+value.username+"</td><td>"+value.password+"</td></tr>")
+                        });
+                    }
+                    catch(err){
+                        console.error(err);
+                    }
+                }
+                users();
+
+                $('#addAccount').on('click', ()=>{
+                    const username = $('#username').val();
+                    const password = $('#password').val();
+                    const body = {username, password};
+
+                    const addUsers = async ()=>{
+                        const response = await fetch("http://localhost:5000/users",
+                        {
+                            method : "POST",
+                            headers : {"Content-type" : "application/json"},
+                            body : JSON.stringify(body)
+                        });
+                    }
+
+                    addUsers();
+
+                    $('#added').removeClass('d-none');
+
+                    setTimeout(function(){
+                        $('#added').addClass('d-none');
+                    }, 3000);
+                });
+
+            });
+            
+        </script>
+    </body>
+
+</html>
