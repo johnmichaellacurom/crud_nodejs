@@ -10,13 +10,22 @@
 //     database : "crud"
 // });
 
+// //for mysql
+// const {createPool} = require('mysql');
+// const pool = createPool({
+//     host : "localhost",
+//     user : "root",
+//     password : "",
+//     database : "test"
+// });
+
 //for mysql
 const {createPool} = require('mysql');
 const pool = createPool({
-    host : "localhost",
-    user : "root",
-    password : "",
-    database : "test"
+    host : "db4free.net",
+    user : "root_12345",
+    password : "root1234",
+    database : "crud_nodejs"
 });
 
 
