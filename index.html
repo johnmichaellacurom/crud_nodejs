@@ -31,9 +31,11 @@
         <script>
 
             $(document).ready(function(){
+
+                const fetchURL = "https://crudnodejstester.onrender.com/users";
                 const users = async ()=>{
                     try{
-                        const response = await fetch("http://localhost:5000/users", {method : "GET"});
+                        const response = await fetch(fetchURL, {method : "GET"});
                         const jsonData = await response.json();
     
                         jsonData.map((value, index, array) => {
@@ -53,7 +55,7 @@
                     const body = {username, password};
 
                     const addUsers = async ()=>{
-                        const response = await fetch("http://localhost:5000/users",
+                        const response = await fetch(fetchURL,
                         {
                             method : "POST",
                             headers : {"Content-type" : "application/json"},
