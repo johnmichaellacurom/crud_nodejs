@@ -8,17 +8,8 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/users", async (req, res)=>{
-    // try{
-    //     // for postgres
-    //     const query = await pool.query("SELECT * FROM `user`;");
-    //     res.json(query.rows);
-    // }
-    // catch(err){
-    //     console.error(err);
-    // }
-
     // for mysql
-    await pool.query("SELECT * FROM `user`;", (err, result, field) => {
+    pool.query("SELECT * FROM `user`;", (err, result, field) => {
         if(err){
             console.err(err);
         }
@@ -30,7 +21,7 @@ app.get("/users", async (req, res)=>{
 
 app.post("/users", async (req, res) =>{
     const {username, password} = req.body;
-    await pool.query("INSERT INTO `user`(`username`,`password`) VALUES('"+username+"','"+password+"');", (err, result, field) => {
+    pool.query("INSERT INTO `user`(`username`,`password`) VALUES('"+username+"','"+password+"');", (err, result, field) => {
         if(err){
             console.err(err);
         }
